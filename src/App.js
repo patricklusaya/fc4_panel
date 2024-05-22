@@ -1,24 +1,37 @@
 import logo from './logo.svg';
+import * as firebase from 'firebase';
 import './App.css';
+import { useEffect, useState } from 'react';
+import { firebaseConfig } from './firebaseConfig';
+import Home from './components/Home';
+
 
 function App() {
+
+ 
+
+
+  useEffect(() => {
+    // Check if an app has already been initialized
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
+    // Now you can safely use Firebase services
+    // Example: Accessing Firestore
+    const db = firebase.firestore();
+    // You can now interact with Firestore through the 'db' variable
+  }, []);
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <div className="App">
+
+    <Home/>
+    
+  </div>
   );
 }
 
